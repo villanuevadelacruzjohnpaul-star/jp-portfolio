@@ -134,6 +134,9 @@ if (hangingID && idCard && idLace && idConnector) {
         idHardware.style.transform =
             `translateX(-50%) translate(${x}px, ${y}px) rotate(${tilt}deg)`;
     }
+
+    updateID();
+    
     hangingID.addEventListener("pointerdown", (e) => {
         if (e.button !== 0) return;
         if (!e.target.closest("#idCard")) return;
