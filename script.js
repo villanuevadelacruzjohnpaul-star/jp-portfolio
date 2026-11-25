@@ -113,34 +113,30 @@ if (hangingID && idCard && idLace && idConnector) {
 
     let animationFrame;
 
-    function updateID() {
-    // Fixed lace size para hindi lumapad o ma-stretch
-    idLace.style.height = "230px";
+       function updateID() {
+        const laceHeight = idLace.clientHeight;
 
-    // Position ng lace endpoint
-    const endX = 60 + (x * 120 / 44);
-    const endY = 300 * (230 + y) / 230;
+        const endX = 60 + (x * 120 / idLace.clientWidth);
+        const endY = 300 * (laceHeight + y) / laceHeight;
 
-    // Natural fabric curve
-    const curve = `M 60 0
-        C ${60 + (endX - 60) * 0.12} ${endY * 0.25},
-          ${60 + (endX - 60) * 0.85} ${endY * 0.85},
-          ${endX} ${endY}`;
+        const curve = `M 60 0
+            C ${60 + (endX - 60) * 0.12} ${endY * 0.25},
+              ${60 + (endX - 60) * 0.85} ${endY * 0.85},
+              ${endX} ${endY}`;
 
-    laceShadow.setAttribute("d", curve);
-    laceBand.setAttribute("d", curve);
-    laceHighlight.setAttribute("d", curve);
-    lacePattern.setAttribute("d", curve);
+        laceShadow.setAttribute("d", curve);
+        laceBand.setAttribute("d", curve);
+        laceHighlight.setAttribute("d", curve);
+        lacePattern.setAttribute("d", curve);
 
-    // Natural angle ng ID base sa hila
-    const tilt = -Math.atan2(x, 230 + y) * (180 / Math.PI);
+        const tilt = -Math.atan2(x, laceHeight + y) * (180 / Math.PI);
 
-    idHardware.style.transform =
-        `translateX(-50%) translate(${x}px, ${y}px) rotate(${tilt}deg)`;
-}
+        idHardware.style.transform =
+            `translateX(-50%) translate(${x}px, ${y}px) rotate(${tilt}deg)`;
+    }
     hangingID.addEventListener("pointerdown", (e) => {
         if (e.button !== 0) return;
-
+        if (!e.target.closest("#idCard")) return;
         dragging = true;
         dragged = false;
         clickedCard = e.target.closest("#idCard") !== null;
