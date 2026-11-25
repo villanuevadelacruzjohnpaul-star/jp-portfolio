@@ -852,12 +852,28 @@ mask-image: radial-gradient(
     animation: fadeInUp 1s ease forwards;
 }
 
+
 /* MOBILE ID */
 
 @media screen and (max-width: 600px) {
+
+    .hero {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .hero-content {
+        width: 100%;
+        min-width: 0;
+    }
+
     .hero-id-container {
         width: 100%;
-        min-height: 480px;
+        max-width: 320px;
+        min-height: 520px;
+        flex-shrink: 1;
+        touch-action: pan-y;
     }
 
     .id-lace {
@@ -865,11 +881,23 @@ mask-image: radial-gradient(
         width: 110px;
     }
 
+    .id-hardware {
+        top: 190px;
+        width: 190px;
+        height: 320px;
+    }
+
     .id-card {
         width: 190px;
         height: 285px;
     }
+
+    #idCard {
+        touch-action: none;
+        cursor: grab;
+    }
 }
+
 
 /* BUTTON ANIMATION */
 
